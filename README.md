@@ -1,4 +1,4 @@
-# 🌟 Lumen: Lighting the Path to Collaborative Learning  
+# 🌟 Lumen: Lighting the Path to Collaborative Learning
 
 <p align="center">
   <img src="https://img.shields.io/badge/Hackathon-Project-blueviolet?style=for-the-badge"/>
@@ -8,12 +8,13 @@
 </p>
 
 <p align="center">
-  <img src="https://media.giphy.com/media/26xBukhJEu7qYDnTO/giphy.gif" width="500px" alt="Lumen Banner"/>
+  <!-- Replace with your own banner image or keep the Unsplash sample -->
+  <img src="./assets/banner.png" alt="Lumen Banner" width="800"/>
 </p>
 
 ---
 
-## 👥 Team Juggernaut  
+## 👥 Team Juggernaut
 - Siddharth Kumar Jena  
 - Ayutayam Sutar  
 - Ashutosh Nayak  
@@ -21,72 +22,76 @@
 
 ---
 
-## 🎯 The Modern Student's Dilemma  
+## 🎯 The Modern Student's Dilemma
 Students today face:  
-- ❌ **Fragmented Collaboration** – Hard to find the right peers.  
-- ⏳ **Redundant Study Material** – Wasted effort making notes/flashcards.  
-- 💸 **Limited Personalized Help** – Mentorship is costly & scarce.  
+- ❌ **Fragmented Collaboration** – Hard to find the right peers  
+- ⏳ **Redundant Study Material** – Re-creating notes & flashcards from scratch  
+- 💸 **Limited Personalized Help** – 1:1 mentorship is costly & scarce  
 
-👉 **Result:** Stress, inefficiency, and lost potential.  
+👉 **Result:** Stress, inefficiency, and lost potential.
 
 ---
 
-## 💡 Our Solution – *Lumen*  
-An **AI-powered learning ecosystem** that makes education more collaborative, engaging, and personalized.  
+## 💡 Our Solution – *Lumen*
+An **AI-powered learning ecosystem** that makes education more collaborative, engaging, and personalized.
 
-### 🔑 Core Features  
-✨ **Smart Dashboard** – Progress tracking + AI suggestions  
-✨ **AI Study Group Matcher** – Find like-minded peers  
-✨ **Flashcard Forge** – Instant AI flashcards  
-✨ **Doubt Solver** – Verified mentors on demand  
-✨ **Gamification & Leaderboards** – Learn with fun challenges  
-✨ **Profiles & Achievements** – Showcase your growth  
+### 🔑 Core Features
+- 📊 **Smart Dashboard** – Progress tracking + AI review suggestions  
+- 🤝 **AI Study Group Matcher** – Connect by subjects, skills, and goals  
+- 🃏 **Flashcard Forge** – Instant AI-generated flashcards  
+- ❓ **Doubt Solver** – Verified mentors for 1:1 support (online/in-person)  
+- 🏆 **Gamification & Leaderboards** – XP, achievements, reputation  
+- 🧑‍🎓 **Profiles & Achievements** – Showcase your growth and identity
 
 <p align="center">
-  <img src="https://media.giphy.com/media/3ohzdU6g6e2L3w7nCE/giphy.gif" width="400px" alt="Collaboration"/>
+  <!-- Replace with your own image -->
+  <img src="./assets/collaboration.png" alt="Collaborative Learning" width="600"/>
 </p>
 
 ---
 
-## 🌍 Our Vision – Beyond the Hackathon  
+## 🌍 Our Vision – Beyond the Hackathon
 1. 🌐 **Global Learning Communities** – Cross-border peer learning  
-2. 🤖 **Real-time AI Tutors** – Personalized instant help  
-3. 🏆 **Gamified Scalable Learning** – Engaging competitions worldwide  
-4. 🔌 **EdTech Integration** – Plug-and-play for schools & universities  
+2. 🤖 **Real-time AI Tutors** – Instant, personalized help  
+3. 🏆 **Scalable Gamified Learning** – Engaging competition across institutions  
+4. 🔌 **Seamless EdTech Integration** – Plug-and-play for schools & universities  
 
-⚡ *Dream big: one **all-in-one digital campus** for every student, everywhere.*  
-
----
-
-## 🛠️ Tech Stack  
-
-**Frontend:** React.js | Tailwind CSS | Vanilla CSS  
-**Backend:** Node.js | Express.js | CORS  
-
-**Special Thanks To:**  
-- ⚡ Google Gemini – Advanced AI magic  
-- 🎨 Animista – CSS animation power  
-- 🌐 Netlify – Smooth frontend deployment  
-- 🚀 Render – Backend hosting made easy  
-- 📊 Wolfram – Knowledge API  
+⚡ *Ultimate goal: one **all-in-one digital campus** for every student, everywhere.*
 
 ---
 
-## 🎮 How It Works (At a Glance)  
-1️⃣ Sign up and set your learning goals  
+## 🛠️ Tech Stack
+**Frontend:** React.js • Tailwind CSS • Vanilla CSS  
+**Backend:** Node.js • Express.js • CORS  
+
+**Special Thanks:**  
+- ⚡ Google Gemini – Advanced AI capabilities  
+- 🎨 Animista – CSS animations  
+- 🌐 Netlify – Frontend hosting  
+- 🚀 Render – Backend deployment  
+- 📊 Wolfram – API keys & knowledge
+
+---
+
+## 🎮 How It Works (At a Glance)
+1️⃣ Set goals & create your profile  
 2️⃣ Get matched with study buddies & mentors  
-3️⃣ Auto-generate flashcards for revision  
-4️⃣ Track progress, earn XP, and climb the leaderboard  
+3️⃣ Generate flashcards and revise faster  
+4️⃣ Track progress, earn XP, and climb the leaderboard
 
 <p align="center">
-  <img src="https://media.giphy.com/media/l41lVsYDBC0UVQJCE/giphy.gif" width="400px" alt="Gamified Learning"/>
+  <!-- Replace with your own image -->
+  <img src="./assets/gamified-learning.png" alt="Gamified Learning" width="600"/>
 </p>
 
 ---
 
-## 🏅 Team Juggernaut  
-> *“Lighting the path to collaborative learning.”*  
+## 🏅 Team Juggernaut
+> *“Lighting the path to collaborative learning.”*
 
 <p align="center">
-  <img src="https://media.giphy.com/media/xUPGcgtKxm4PADy3iM/giphy.gif" width="300px" alt="Team Spirit"/>
+  <!-- Replace with your own image -->
+  <img src="./assets/team.png" alt="Team Juggernaut" width="420"/>
 </p>
+
+---
