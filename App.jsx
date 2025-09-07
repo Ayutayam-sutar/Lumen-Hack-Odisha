@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-// The import path for AuthContext was incorrect (`./contexts/AuthContext`), causing the type to be inferred as `unknown`.
+// The import path for AuthContext was incorrect (./contexts/AuthContext), causing the type to be inferred as unknown.
 // Correcting the path resolves the property access error.
 import { AuthContext } from './contexts/AuthContext';
 
@@ -18,6 +18,7 @@ import DoubtSolverPage from './pages/DoubtSolverPage';
 import ProfilePage from './pages/ProfilePage';
 import LearnAiPage from './pages/LearnAiPage';
 import LeaderboardPage from './pages/LeaderboardPage';
+import GroupDetailPage from './pages/GroupDetailPage';
 
 const ProtectedRoute = () => {
   const authContext = useContext(AuthContext);
@@ -40,6 +41,7 @@ const App = () => {
       <Route path="/app" element={<ProtectedRoute />}>
         <Route path="dashboard" element={<DashboardPage />} />
         <Route path="groups" element={<StudyGroupMatcherPage />} />
+        <Route path="groups/:groupId" element={<GroupDetailPage />} />
         <Route path="decks" element={<FlashcardForgePage />} />
         <Route path="decks/:deckId" element={<StudySessionPage />} />
         <Route path="solve" element={<DoubtSolverPage />} />

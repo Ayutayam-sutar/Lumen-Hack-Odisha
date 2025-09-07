@@ -14,9 +14,22 @@ const app = express();
 // Middleware
 app.use(cors()); // Enable Cross-Origin Resource Sharing
 app.use(express.json()); // Allow the server to accept JSON in the body of requests
+
 app.use('/api/users', require('./routes/userRoutes')); 
 app.use('/api/groups', require('./routes/groupRoutes')); 
 app.use('/api/ai', require('./routes/aiRoutes.js'));
+app.use('/api/wolfram', require('./routes/wolframRoutes.js'));
+app.use('/api/decks', require('./routes/deckRoutes.js'));
+
+if (process.env.NODE_ENV === 'production') {
+    // Set the static folder from the frontend build
+    app.use(express.static(path.join(__dirname, '../dist')));
+
+    // For any route that is not an API route, send the index.html file
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, '..', 'dist', 'index.html'));
+    });
+}
 
 // --- Database Connection ---
 const MONGO_URI = process.env.MONGO_URI;

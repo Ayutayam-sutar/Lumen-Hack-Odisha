@@ -12,6 +12,7 @@ const SignUpPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null); 
     const navigate = useNavigate();
     const authContext = useContext(AuthContext);
     const gamification = useContext(GamificationContext);
@@ -71,18 +72,19 @@ const SignUpPage = () => {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsLoading(true);
-        try {
-            // In a real app, this would be a signup call
-            await authContext.login(email, password, gamification.addXp); 
-            navigate('/app/dashboard');
-        } catch (err) {
-            console.error("Signup failed", err);
-        } finally {
-            setIsLoading(false);
-        }
-    };
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null); // <-- ADD THIS LINE to clear old errors
+    try {
+        await authContext.signup(name, email, password, gamification.addXp);
+        navigate('/app/dashboard');
+    } catch (err) {
+        console.error("Signup failed", err);
+        setError(err.message); // <-- CHANGE THIS LINE to set the error message
+    } finally {
+        setIsLoading(false);
+    }
+};
 
     return (
         <div 
@@ -184,7 +186,12 @@ const SignUpPage = () => {
                             )}
                         </Button>
                     </form>
-                    
+                    {error && (
+    <p className="text-center mt-4 text-sm text-red-500 font-semibold" style={{ transform: 'translateZ(5px)' }}>
+        {error}
+    </p>
+)}
+
                     <p className="text-center mt-6 text-sm text-light-text-muted dark:text-dark-text-muted" style={{transform: 'translateZ(5px)'}}>
                         {t('signup.hasAccount')}{' '}
                         <Link 

@@ -1,7 +1,9 @@
 import React, { useState, useMemo, useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { mockMentors } from '../utils/mockData';
+import apiClient from '../services/apiClient'; 
 import { GamificationContext } from '../contexts/GamificationContext';
+import { AuthContext } from '../contexts/AuthContext';
 import Card from '../components/atoms/Card';
 import Button from '../components/atoms/Button';
 import Input from '../components/atoms/Input';
@@ -144,8 +146,44 @@ const DoubtSolverPage = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [bookingDetails, setBookingDetails] = useState(null);
   const gamification = useContext(GamificationContext);
+const { loadUser } = useContext(AuthContext);
+    const [mentors, setMentors] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
-  const uniqueExpertise = useMemo(() => ['All', ...new Set(mockMentors.map(m => m.expertise))], []);
+         useEffect(() => {
+        const fetchMentors = async () => {
+            try {
+                const response = await apiClient.get('/users/mentors');
+                if (response.data && response.data.length > 0) {
+                    // If we get real mentors, map them to the format the UI expects
+                    const realMentors = response.data.map(mentor => ({
+                        id: mentor._id, // Use the backend's _id
+                        name: mentor.name,
+                        expertise: mentor.expertise,
+                        rating: mentor.mentorRating,
+                        rate: mentor.mentorRate,
+                        avatarUrl: `https://api.dicebear.com/8.x/bottts/svg?seed=${mentor.name}`,
+                        // Add default values for properties that don't exist on the backend yet
+                        modes: ['online', 'offline'], 
+                        availableSlots: ['10:00 AM', '2:00 PM', '4:00 PM'],
+                    }));
+                    setMentors(realMentors);
+                } else {
+                    // If no real mentors are found, use the mock data as a fallback
+                    setMentors(mockMentors);
+                }
+            } catch (error) {
+                console.error("Failed to fetch mentors, using mock data.", error);
+                setMentors(mockMentors); // Use mock data on error
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchMentors();
+    }, []);
+
+
+    const uniqueExpertise = useMemo(() => ['All', ...new Set(mentors.map(m => m.expertise))], [mentors]);
 
   const filteredMentors = useMemo(() => {
     return mockMentors.filter(mentor => {

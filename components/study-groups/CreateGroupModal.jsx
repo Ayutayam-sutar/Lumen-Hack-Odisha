@@ -53,7 +53,7 @@ const CreateGroupModal = ({ isOpen, onClose, onCreateGroup }) => {
         if (generatedDetails) {
             // FIX: Check if onCreateGroup is a function before calling it.
             if (typeof onCreateGroup === 'function') {
-                onCreateGroup(generatedDetails);
+                onCreateGroup({ ...generatedDetails, subject: subject });
             } else {
                 console.warn("onCreateGroup prop is not a function. The new group was not passed to the parent.");
             }
