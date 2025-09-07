@@ -17,7 +17,7 @@ import React, { createContext, useState, useMemo, useEffect } from 'react';
  * @property {() => void} logout
  */
 
-export const AuthContext = createContext(undefined);
+export const AuthContext = createContext(undefined) ;
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
