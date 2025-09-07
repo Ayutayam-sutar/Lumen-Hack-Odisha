@@ -91,5 +91,35 @@ router.get('/me', protect, async (req, res) => {
     res.status(200).json(req.user);
 });
 
+// Inside server/routes/userRoutes.js
+
+// ... your existing routes are above this ...
+
+
+// @route   GET /api/users/leaderboard
+// @desc    Get users sorted for the leaderboard by XP or reputation
+// @access  Private (only logged-in users can see the leaderboard)
+router.get('/leaderboard', protect, async (req, res) => {
+    // We'll get the type from a query parameter, e.g., /leaderboard?type=xp
+    const { type } = req.query;
+
+    // Determine which field to sort by. Default to XP.
+    const sortField = type === 'reputation' ? '-reputation' : '-xp';
+
+    try {
+        // Find all users, sort them, limit to the top 20, and select only the fields we need.
+        const users = await User.find()
+            .sort(sortField)
+            .limit(20)
+            .select('name xp reputation'); // We only send non-sensitive data
+
+        res.json(users);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Server Error');
+    }
+});
+
 
 module.exports = router;
+

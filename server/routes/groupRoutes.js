@@ -232,6 +232,45 @@ router.delete('/:id', protect, async (req, res) => {
         res.status(500).send('Server Error');
     }
 });
+// Inside server/routes/groupRoutes.js
+
+// @route   PUT /api/groups/:id/join
+// @desc    Join a study group
+// @access  Private
+router.put('/:id/join', protect, async (req, res) => {
+    try {
+        const group = await Group.findById(req.params.id);
+
+        if (!group) {
+            return res.status(404).json({ msg: 'Group not found' });
+        }
+        if (group.members.length >= group.maxMembers) {
+            return res.status(400).json({ msg: 'Group is already full' });
+        }
+        if (group.members.includes(req.user.id)) {
+            return res.status(400).json({ msg: 'You are already a member of this group' });
+        }
+
+        group.members.push(req.user.id);
+        await group.save();
+
+        // --- THIS IS THE NEW BRICK ---
+        // Find the user who created the group and give them reputation points.
+        // We'll give them 5 reputation points each time someone joins.
+        await User.findByIdAndUpdate(group.createdBy, { $inc: { reputation: 5 } });
+        // --- END OF NEW BRICK ---
+        
+        const updatedGroup = await Group.findById(group._id)
+            .populate('createdBy', 'name')
+            .populate('members', 'name');
+
+        res.json(updatedGroup);
+
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Server Error');
+    }
+});
 
 module.exports = router; // This should be at the end of the file
 

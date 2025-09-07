@@ -1,48 +1,36 @@
-// Inside src/pages/LeaderboardPage.jsx
-
-import React, { useState, useEffect, useContext, useMemo } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import apiClient from '../services/apiClient'; // 1. Import our API client
-import { AuthContext } from '../contexts/AuthContext'; // 2. Import AuthContext
+import { mockXpLeaderboard, mockReputationLeaderboard } from '../utils/mockData';
 import LeaderboardToggle from '../components/leaderboard/LeaderboardToggle';
 import RankingsList from '../components/leaderboard/RankingsList';
 import Skeleton from '../components/atoms/Skeleton';
 import Card from '../components/atoms/Card';
+import { AchievementContext } from '../contexts/AchievementContext';
 
 const LeaderboardPage = () => {
     const { t } = useTranslation();
     const [boardType, setBoardType] = useState('xp');
     const [isLoading, setIsLoading] = useState(true);
-    const [users, setUsers] = useState([]); // 3. State to hold the raw user data from the backend
-    const { user: currentUser } = useContext(AuthContext); // Get the currently logged-in user
+    const achievementContext = useContext(AchievementContext);
 
-    // 4. This useEffect now fetches real data from our new backend route
+    if (!achievementContext) throw new Error("LeaderboardPage requires AchievementProvider");
+    const { logAction } = achievementContext;
+
     useEffect(() => {
-        const fetchLeaderboard = async () => {
-            setIsLoading(true);
-            try {
-                const response = await apiClient.get(`/users/leaderboard?type=${boardType}`);
-                setUsers(response.data);
-            } catch (error) {
-                console.error("Failed to fetch leaderboard data:", error);
-            } finally {
-                setIsLoading(false);
+        setIsLoading(true);
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+            // After data "loads", check for achievement
+            const data = boardType === 'xp' ? mockXpLeaderboard : mockReputationLeaderboard;
+            const currentUserEntry = data.find(entry => entry.isCurrentUser);
+            if (currentUserEntry && currentUserEntry.rank <= 10) {
+                logAction('leaderboardRanked', { rank: currentUserEntry.rank });
             }
-        };
+        }, 1000);
+        return () => clearTimeout(timer);
+    }, [boardType, logAction]);
 
-        fetchLeaderboard();
-    }, [boardType]); // It re-runs whenever the boardType changes (XP vs Reputation)
-
-    // 5. This useMemo hook processes the raw user data into the format our UI needs
-    const processedData = useMemo(() => {
-        return users.map((user, index) => ({
-            rank: index + 1,
-            name: user.name,
-            score: boardType === 'xp' ? user.xp : user.reputation,
-            avatarUrl: `https://api.dicebear.com/8.x/bottts/svg?seed=${user.name}`,
-            isCurrentUser: currentUser && user._id === currentUser.id,
-        }));
-    }, [users, boardType, currentUser]);
+    const data = boardType === 'xp' ? mockXpLeaderboard : mockReputationLeaderboard;
 
     return (
         <div className="space-y-8 slide-in-top">
@@ -63,7 +51,7 @@ const LeaderboardPage = () => {
                 </header>
                 {isLoading ? (
                     <div className="p-4 space-y-3">
-                        {[...Array(5)].map((_, i) => (
+                        {[...Array(4)].map((_, i) => (
                             <div key={i} className="grid grid-cols-12 gap-4 items-center">
                                 <div className="col-span-2"><Skeleton className="h-8 w-8 rounded-full" /></div>
                                 <div className="col-span-6 flex items-center gap-3">
@@ -75,10 +63,10 @@ const LeaderboardPage = () => {
                         ))}
                     </div>
                 ) : (
-                    // 6. Pass the fully processed data to the RankingsList
-                    <RankingsList data={processedData} />
+                    <RankingsList data={data} />
                 )}
             </Card>
+
         </div>
     );
 };
