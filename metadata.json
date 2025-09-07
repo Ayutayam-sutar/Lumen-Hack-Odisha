@@ -1,0 +1,5 @@
+{
+  "name": "Lumen: AI Learning Ecosystem",
+  "description": "An intelligent, AI-augmented learning ecosystem designed for scalability and component reusability. Features include AI-driven weakness analysis, a study group matcher, a flashcard forge with spaced repetition, and a context-aware AI Tutor.",
+  "requestFramePermissions": []
+}

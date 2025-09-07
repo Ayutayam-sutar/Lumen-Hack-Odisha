@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="pages\lumen lgo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lumen: AI Learning Ecosystem</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS -->
+    <style>
+      /* Tracking in expand animation */
+      @-webkit-keyframes tracking-in-expand {
+        0% {
+          letter-spacing: -0.5em;
+          opacity: 0;
+        }
+        40% {
+          opacity: 0.6;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      
+      @keyframes tracking-in-expand {
+        0% {
+          letter-spacing: -0.5em;
+          opacity: 0;
+        }
+        40% {
+          opacity: 0.6;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      
+      /* Slide in top animation */
+      @-webkit-keyframes slide-in-top {
+        0% {
+          -webkit-transform: translateY(-1000px);
+                  transform: translateY(-1000px);
+          opacity: 0;
+        }
+        100% {
+          -webkit-transform: translateY(0);
+                  transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      
+      @keyframes slide-in-top {
+        0% {
+          -webkit-transform: translateY(-1000px);
+                  transform: translateY(-1000px);
+          opacity: 0;
+        }
+        100% {
+          -webkit-transform: translateY(0);
+                  transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      
+      /* Apply animations to elements */
+      .tracking-in-expand {
+        -webkit-animation: tracking-in-expand 0.9s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+        animation: tracking-in-expand 0.9s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+      }
+      
+      .slide-in-top {
+        -webkit-animation: slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        animation: slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+      }
+      
+      /* Additional animations */
+      @keyframes float {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+      
+      .float-animation {
+        animation: float 3s ease-in-out infinite;
+      }
+      
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      .fade-in-up {
+        animation: fadeInUp 0.8s ease-out forwards;
+      }
+      
+      /* 3D card effects */
+      .feature-card-3d, .feedback-card-3d {
+        transform-style: preserve-3d;
+        transition: transform 0.5s ease, box-shadow 0.5s ease;
+      }
+      
+      .cloud {
+        transition: transform 1s ease-out;
+        z-index: 1;
+      }
+      
+      /* Reduced motion for accessibility */
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+      
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e0;
+        border-radius: 4px;
+      }
+      
+      .dark ::-webkit-scrollbar-thumb {
+        background: #4a5568;
+      }
+      
+      ::-webkit-scrollbar-thumb:hover {
+        background: #a0aec0;
+      }
+      
+      .dark ::-webkit-scrollbar-thumb:hover {
+        background: #718096;
+      }
+    </style>
+    
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            colors: {
+              primary: {
+                DEFAULT: '#2B6CB0',
+                '50': '#EBF8FF',
+                '100': '#BEE3F8',
+                '200': '#90CDF4',
+                '300': '#63B3ED',
+                '400': '#4299E1',
+                '500': '#3182CE',
+                '600': '#2B6CB0',
+                '700': '#2C5282',
+                '800': '#2A4365',
+                '900': '#1A365D',
+              },
+              accent: {
+                DEFAULT: '#ED8936',
+                '50': '#FFFAF0',
+                '100': '#FEEBC8',
+                '200': '#FBD38D',
+                '300': '#F6AD55',
+                '400': '#ED8936',
+                '500': '#DD6B20',
+                '600': '#C05621',
+                '700': '#9C4221',
+                '800': '#7B341E',
+                '900': '#652B19',
+              },
+              light: {
+                bg: '#F7FAFC',
+                'bg-alt': '#FFFFFF',
+                text: '#2D3748',
+                'text-muted': '#718096',
+                border: '#E2E8F0',
+              },
+              dark: {
+                bg: '#1A202C',
+                'bg-alt': '#2D3748',
+                text: '#F7FAFC',
+                'text-muted': '#A0AEC0',
+                border: '#4A5568',
+              }
+            },
+            animation: {
+              'tracking-in-expand': 'tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both',
+              'slide-in-top': 'slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
+              'float': 'float 3s ease-in-out infinite',
+              'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+            }
+          }
+        }
+      }
+    </script>
+    <script type="importmap">
+    {
+      "imports": {
+        "react/": "https://aistudiocdn.com/react@^19.1.1/",
+        "react": "https://aistudiocdn.com/react@^19.1.1",
+        "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+        "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.8.2",
+        "i18next": "https://cdn.jsdelivr.net/npm/i18next@23.11.5/dist/esm/i18next.js",
+        "react-i18next": "https://cdn.jsdelivr.net/npm/react-i18next@14.1.2/dist/es/index.js",
+        "i18next-browser-languagedetector": "https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@8.0.0/dist/esm/i18nextBrowserLanguageDetector.js",
+        "i18next-http-backend": "https://cdn.jsdelivr.net/npm/i18next-http-backend@2.5.2/dist/esm/i18nextHttpBackend.js",
+        "react-dom": "https://aistudiocdn.com/react-dom@^19.1.1",
+        "react-dom/client": "https://aistudiocdn.com/react-dom@^19.1.1/client",
+        "@google/genai": "https://esm.run/@google/genai"
+      }
+    }
+    </script>
+  </head>
+  <body class="antialiased font-sans bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text">
+    <div id="root"></div>
+    
+  
+    
+    <script type="module" src="/index.jsx"></script>
+  </body>
+</html>
