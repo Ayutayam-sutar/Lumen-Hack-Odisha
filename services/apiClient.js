@@ -5,7 +5,7 @@ import axios from 'axios';
 // When you run `npm run dev`, it will be 'http://localhost:5000'.
 // On Netlify, it will be your live Render URL.
 
-console.log("The VITE_API_BASE_URL that Netlify sees is:", import.meta.env.VITE_API_BASE_URL);
+console.log("The Base URL Netlify is using is:", import.meta.env.VITE_API_BASE_URL);
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 
 const apiClient = axios.create({
