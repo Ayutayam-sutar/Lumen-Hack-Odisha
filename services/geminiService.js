@@ -1,7 +1,11 @@
 import { GoogleGenAI, Type } from "@google/genai";
 
-// This service is now connected to the actual Gemini API.
-const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_API_KEY });
+// This is the ONLY line you need to change.
+// We are using a more specific variable name for the Gemini API key.
+const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
+
+// --- All of your team's code below this line is completely unchanged ---
+
 const model = "gemini-2.5-flash";
 
 export const getWeaknessAnalysis = async (performanceData) => {
