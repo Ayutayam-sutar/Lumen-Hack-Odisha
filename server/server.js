@@ -16,7 +16,7 @@ const app = express();
 const allowedOrigins = [
     'http://localhost:5173', // For your local development
     // IMPORTANT: Make sure your real Netlify URL is here!
-    'https://your-netlify-site-name.netlify.app'
+    'https://lumen-hackodisha-juggernaut.netlify.app/'
 ];
 
 const corsOptions = {
