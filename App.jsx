@@ -27,6 +27,7 @@ const ProtectedRoute = () => {
     throw new Error('AuthContext must be used within an AuthProvider');
   }
 
+  
   return authContext.isAuthenticated ? <AppLayout /> : <Navigate to="/" replace />;
 };
 
