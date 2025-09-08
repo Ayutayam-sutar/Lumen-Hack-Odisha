@@ -26,9 +26,11 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../dist')));
 
     // For any route that is not an API route, send the index.html file
-    app.get('/*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, '..', 'dist', 'index.html'));
-    });
+    // Use a regular expression to match all GET requests.
+// This route MUST be the last GET route in your file.
+app.get(/^\/.*$/, (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
+});
 }
 
 // --- Database Connection ---
