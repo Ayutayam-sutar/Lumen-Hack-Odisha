@@ -123,7 +123,7 @@ const SignUpPage = () => {
             >
                 {/* 3D depth effect elements */}
                 <div className="absolute -top-4 -left-4 w-24 h-24 bg-accent-200 dark:bg-accent-800 rounded-2xl opacity-30 -z-10" style={{transform: 'translateZ(-20px)'}}></div>
-                <div><h2>JAI SHREE RAM </h2></div>
+           
                 <div className="absolute -bottom-4 -right-4 w-20 h-20 bg-primary-300 dark:bg-primary-700 rounded-2xl opacity-30 -z-10" style={{transform: 'translateZ(-15px)'}}></div>
                 
                 <div className="relative" style={{transform: 'translateZ(20px)'}}>
