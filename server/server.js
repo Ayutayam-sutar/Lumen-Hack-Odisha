@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../dist')));
 
     // For any route that is not an API route, send the index.html file
-    app.get('*', (req, res) => {
+    app.get('/*', (req, res) => {
         res.sendFile(path.resolve(__dirname, '..', 'dist', 'index.html'));
     });
 }
