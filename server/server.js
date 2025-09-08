@@ -5,35 +5,42 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const path = require('path');
+
 // Load environment variables from .env file
 dotenv.config();
 
 // Initialize the Express app
 const app = express();
 
-// Middleware
-app.use(cors()); // Enable Cross-Origin Resource Sharing
+// --- Middleware ---
+const allowedOrigins = [
+    'http://localhost:5173', // For your local development
+    // IMPORTANT: Make sure your real Netlify URL is here!
+    'https://your-netlify-site-name.netlify.app'
+];
+
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('This request is blocked by CORS policy.'));
+        }
+    }
+};
+
+app.use(cors(corsOptions)); // Enable Cross-Origin Resource Sharing with specific options
 app.use(express.json()); // Allow the server to accept JSON in the body of requests
 
-app.use('/api/users', require('./routes/userRoutes')); 
-app.use('/api/groups', require('./routes/groupRoutes')); 
+// --- API Routes (Your team's work is unchanged) ---
+app.use('/api/users', require('./routes/userRoutes'));
+app.use('/api/groups', require('./routes/groupRoutes'));
 app.use('/api/ai', require('./routes/aiRoutes.js'));
 app.use('/api/wolfram', require('./routes/wolframRoutes.js'));
 app.use('/api/decks', require('./routes/deckRoutes.js'));
 
-if (process.env.NODE_ENV === 'production') {
-    // Set the static folder from the frontend build
-    app.use(express.static(path.join(__dirname, '../dist')));
 
-    // For any route that is not an API route, send the index.html file
-    // Use a regular expression to match all GET requests.
-// This route MUST be the last GET route in your file.
-app.get(/^\/.*$/, (req, res) => {
-  res.sendFile(path.join(__dirname, '../dist/index.html'));
-});
-}
-
-// --- Database Connection ---
+// --- Database Connection (Your team's work is unchanged) ---
 const MONGO_URI = process.env.MONGO_URI;
 mongoose.connect(MONGO_URI)
     .then(() => {
@@ -48,7 +55,7 @@ mongoose.connect(MONGO_URI)
         console.error('Connection to MongoDB failed!', error.message);
     });
 
-// --- Basic Test Route ---
+// --- Basic Test Route (Your team's work is unchanged) ---
 app.get('/', (req, res) => {
     res.send('Welcome to the NexusLearn API!');
 });
